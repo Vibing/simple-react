@@ -1,22 +1,26 @@
-function createElement({ elementName, attributes, children }) {
-  return {
-    tag: elementName,
-    attrs: attributes,
-    children
-  };
-}
-
-//React对象
 const React = {
-  createElement
+  createElement: function({ elementName, attributes, children }) {
+    return {
+      tag: elementName,
+      attrs: attributes,
+      children
+    };
+  }
 };
 
-//render方法就是将虚拟dom渲染成真实dom
+const ReactDOM = {
+  render: function(vnode, container) {
+    container.innerHTML = '';
+    render(vnode, container);
+  }
+};
+
 function render(vnode, container) {
-  container.appendChild(createDom(vnode));
+  const dom = createDom(vnode); //将vnode转成真实DOM
+  container.appendChild(dom);
 }
 
-function createDom(vnode, container) {
+function createDom(vnode) {
   if (vnode === undefined || vnode === null || typeof vnode === 'boolean') {
     vnode = '';
   }
@@ -64,13 +68,6 @@ function setAttribute(dom, key, value) {
     dom.setAttribute(key, value);
   }
 }
-
-const ReactDOM = {
-  render: function(vnode, container) {
-    container.innerHTML = '';
-    render(vnode, container);
-  }
-};
 
 const element = (
   <div
