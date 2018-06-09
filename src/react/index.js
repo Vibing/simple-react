@@ -1,11 +1,7 @@
-export default {
-  Component: function(params) {}
-};
+import Component from './component.js';
+import createElement from './create-element.js';
 
-function createElement({ elementName, attributes, children }) {
-  return {
-    tag: elementName,
-    attrs: attributes,
-    children
-  };
-}
+export default {
+  Component,
+  createElement
+};
